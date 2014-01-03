@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.poc.model.User" table="USER"  schema="PGTIS" >
+      
+       <id name="id" type="java.lang.Integer">
+            <column name="I_ID" />
+            <generator class="native" />
+        </id>
+      
+        <property name="userId" type="string"  >
+            <column name="X_USER_ID" />
+        </property>
+        
+        <property name="firstName" type="string">
+            <column name="X_FIRST_NAME"  />
+        </property>
+        
+        <property name="lastName" type="string">
+            <column name="X_LAST_NAME"  />
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

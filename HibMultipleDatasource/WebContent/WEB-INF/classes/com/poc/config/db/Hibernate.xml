@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	
+	<bean id="dataSource1" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="${jndi.name}"/>
+	</bean>
+	
+	<bean id="sessionFactory1" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource1"/>
+	    
+		 <property name="hibernateProperties">
+	       <props>
+	             <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+          
+            <prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+			<prop key="hibernate.cache.use_query_cache">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+                   
+           <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+	            
+	       </props>
+	     </property>
+	    
+	    <property name="mappingResources">
+			<list>
+	           <value>com/poc/config/db/User-d1.hbm.xml</value>	         
+			</list>
+     	 </property>
+	</bean>
+	
+	  <bean id="transactionManager1" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	       <property name="sessionFactory" ref="sessionFactory1"/>
+	  </bean>
+	
+	
+	
+	
+<bean id="dataSource2" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="${jndi.name}"/>
+	</bean>
+	
+	<bean id="sessionFactory2" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource2"/>
+	    
+		 <property name="hibernateProperties">
+	       <props>
+	             <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+            <prop key="hibernate.connection.charSet">UTF-8</prop>
+          
+            <prop key="hibernate.dialect">org.hibernate.dialect.DB2Dialect</prop>
+            <prop key="hibernate.cache.use_second_level_cache">true</prop>
+			<prop key="hibernate.cache.use_query_cache">true</prop>
+            <prop key="hibernate.show_sql">true</prop>
+                   
+           <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+	            
+	       </props>
+	     </property>
+	    
+	    <property name="mappingResources">
+			<list>
+	           <value>com/poc/config/db/User-d2.hbm.xml</value>	         
+			</list>
+     	 </property>
+	</bean>
+	
+	  <bean id="transactionManager2" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	       <property name="sessionFactory" ref="sessionFactory2"/>
+	  </bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>/WEB-INF/classes/com/poc/config/db/database.properties</value>
+		</property>
+	</bean> 
+
+</beans>
